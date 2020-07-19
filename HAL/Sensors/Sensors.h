@@ -11,3 +11,7 @@
 
 
 #endif /* SMARTHOME_HAL_SENSORS_SENSORS_H_ */
+
+/* PRT>> for DIO
+ * PORT >> for mask
+ */

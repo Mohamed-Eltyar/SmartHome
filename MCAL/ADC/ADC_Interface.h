@@ -26,8 +26,8 @@ u16  ADC_u16GetDataDifferential(u8 LOC_u8Gain);
 #define ADC_INT_En		1	// To Enable ISR of ADC Interrupt
 
 //**************** configuration of Auto Trigger Source*****************
-#define AutoTrigEn		0	// to enable auto trigger set 1
-#define Trigger_Mode	2	// to choose mode of Auto trigger
+#define AutoTrigEn		1	// to enable auto trigger set 1
+#define Trigger_Mode	0	// to choose mode of Auto trigger
 
 #define FreeRunning		0
 #define AnalogComp		1
