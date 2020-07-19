@@ -90,14 +90,11 @@ void ADC_VidSingleEnded(u8 LOC_Channel)
 
 	SET_BIT(ADCSRA,PIN6);             //Start Conversion
 }
-/*
-u16  ADC_u16GetDataSingleEnded(void)
+
+u16  ADC_u16GetCrruntValu(void)
 {
-	SET_BIT(ADCSRA,PIN6);
-	while(0==GET_BIT(ADCSRA, PIN4));
-	return ((ADC*5000UL)/1023);
+	return ADC;
 }
-*/
 void ADC_VidAutoTriggerSource(void)
 {
 #if AutoTrigEn==1 && Trigger_Mode==FreeRunning

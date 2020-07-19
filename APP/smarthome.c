@@ -6,4 +6,9 @@
 void smarthome(void)
 {
 
+
+
+	while(1)
+	{
+	}
 }

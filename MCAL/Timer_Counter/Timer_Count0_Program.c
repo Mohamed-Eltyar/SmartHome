@@ -118,37 +118,13 @@ void Tim_Count0_VidInterruptEn(void)
 	#endif
 }
 
-void Tim_Count0_VidCounterReg(u8 Loc_u8TCNTvalue)
-{
-	TCNT0=Loc_u8TCNTvalue;
-}
-
-void Tim_Count0_VidCompareReg(u8 Loc_u8OVoltage)
-{
-	OCR0=10.2*Loc_u8OVoltage*Loc_u8OVoltage;
-}
-
 void Timer0_VidSetCallBack(void (*Fptr)(void))
 {
 	if (Fptr !=NULL)
 	{
-		#if WaveGen==Normal
-		Tim0CallBackPtrOVFL=Fptr;
-		#else
 		Tim0CallBackPtrCOMA=Fptr;
-		#endif
-	}
-
-	}
-
-void __vector_11(void) //Overflow Interrupt
-{
-	if (Tim0CallBackPtrOVFL !=NULL)
-	{
-		Tim0CallBackPtrOVFL();
 	}
 }
-
 ISR(TIMER0_CTC_VECT) //Compare match Interrupt
 {
 	if (Tim0CallBackPtrCOMA !=NULL)

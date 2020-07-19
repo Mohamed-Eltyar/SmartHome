@@ -82,4 +82,3 @@ void Tim_Count2_VidCounterReg(u8 Loc_u8TCNTvalue)
 {
 	TCNT2=Loc_u8TCNTvalue;
 }
-

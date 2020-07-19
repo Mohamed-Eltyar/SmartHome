@@ -6,14 +6,7 @@ void ADC_VidInit(void);
 void ADC_VidEnable(void);
 void ADC_VidAutoTriggerSource(void);
 void ADC_VidSingleEnded(u8 LOC_Channel);
-u16  ADC_u16GetDataSingleEnded(void);
-															/*  Gain=10:
-																	for channel: 8,9,12,13
-																Gain=200:
-																	for channel: 10,11,14,15
-																Gain=1:
-																	for channl: 16 to 29
-															*/
+u16  ADC_u16GetCrruntValu(void);
 
 
 #define InternVCC		1 	//config num for voltage reference( 0 turned off , 1 AVCC external , 3 internal 2.56V)
