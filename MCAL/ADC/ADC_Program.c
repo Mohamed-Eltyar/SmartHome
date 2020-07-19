@@ -355,8 +355,7 @@ void ADC_VidAutoTriggerSource(void)
 }
 
 
-void __vector_16(void)
-
+ISR(ADC_VECT)
 {
 	DIO_VidSetPinValue(PRTD,PIN0,HIGH);
 	_delay_ms(1000);

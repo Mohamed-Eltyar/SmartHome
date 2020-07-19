@@ -9,7 +9,5 @@
 #define  ADCL		*((volatile u8*)0x24)
 #define  ADC		*((volatile u16*)0x24)
 
-void __vector_16(void) __attribute__((signal));
-
 
 #endif
