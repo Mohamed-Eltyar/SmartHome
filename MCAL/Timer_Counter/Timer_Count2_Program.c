@@ -61,14 +61,14 @@ void Tim_Count2_VidCompOutMode(void)
 {
 	//for Fast PWM Mode
 		#if FastOut==Normal
-		CLR_BIT(TCCR2,5);
-		CLR_BIT(TCCR2,4);
+		CLR_BIT(TCCR2,COM21);
+		CLR_BIT(TCCR2,COM20);
 		#elif FastOut==Clear
-		SET_BIT(TCCR2,5);
-		CLR_BIT(TCCR2,4);
+		SET_BIT(TCCR2,COM21);
+		CLR_BIT(TCCR2,COM20);
 		#elif FastOut==Set
-		SET_BIT(TCCR2,5);
-		SET_BIT(TCCR2,4);
+		SET_BIT(TCCR2,COM21);
+		SET_BIT(TCCR2,COM20);
 		#endif
 
 }
