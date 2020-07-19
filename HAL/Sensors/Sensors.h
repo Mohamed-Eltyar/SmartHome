@@ -13,3 +13,7 @@ void func_TIMER0_CTC_Call_Back(void);
 
 
 #endif /* SMARTHOME_HAL_SENSORS_SENSORS_H_ */
+
+/* PRT>> for DIO
+ * PORT >> for mask
+ */
