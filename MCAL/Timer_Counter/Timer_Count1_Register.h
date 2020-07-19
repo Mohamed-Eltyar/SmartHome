@@ -1,5 +1,5 @@
-#ifndef _TIMER_COUNT1_REGISTER_H_
-#define _TIMER_COUNT1_REGISTER_H_
+#ifndef SMARTHOME_MCAL_TIMER_COUNTER_TIMER_COUNT1_REGISTER_H_
+#define SMARTHOME_MCAL_TIMER_COUNTER_TIMER_COUNT1_REGISTER_H_
 
 #define  TCCR1A		*((volatile u8*)0x4F)
 #define  TCCR1B		*((volatile u8*)0x4E)
@@ -11,4 +11,4 @@
 #define  TIFR		*((volatile u8*)0x58)
 
 
-#endif
+#endif  /* SMARTHOME_MCAL_TIMER_COUNTER_TIMER_COUNT1_REGISTER_H_ */

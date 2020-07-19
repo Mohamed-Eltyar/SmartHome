@@ -1,9 +1,9 @@
-#ifndef _GIE_INTERFACE_H_
-#define _GIE_INTERFACE_H_
+#ifndef SMARTHOME_MCAL_GIT_GIE_INTERFACE_H_
+#define SMARTHOME_MCAL_GIT_GIE_INTERFACE_H_
 
 
 void SREG_VidEnable(void);
 void SREG_VidDisble(void);
 
 
-#endif
+#endif    /* SMARTHOME_MCAL_GIT_GIE_INTERFACE_H_ */

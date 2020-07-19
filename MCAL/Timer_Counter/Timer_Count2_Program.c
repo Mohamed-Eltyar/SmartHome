@@ -1,10 +1,10 @@
-#include "STD_TYPES.h"
-#include "BIT_MATH.h"
-#include "Timer_Count_Register.h"
-#include "Timer_Count_Interface.h"
+/*#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
+#include "Timer_Count2_Register.h"
+#include "Timer_Count2_Interface.h"
 
-static void (*SetCallBackPtrOVFL)(void)=NULL;
-static void (*SetCallBackPtrCOMA)(void)=NULL;
+//static void (*SetCallBackPtrOVFL)(void)=NULL;
+//static void (*SetCallBackPtrCOMA)(void)=NULL;
 
 void Tim_Count0_VidWaveGeneration(void)
 {
@@ -147,10 +147,11 @@ void __vector_11(void) //Overflow Interrupt
 	}
 }
 
-void __vector_10(void) //Compare match Interrupt
+void __vector_10(void)      //Compare match Interrupt
 {
 	if (SetCallBackPtrCOMA !=NULL)
 		{
 		SetCallBackPtrCOMA();
 		}
 }
+*/

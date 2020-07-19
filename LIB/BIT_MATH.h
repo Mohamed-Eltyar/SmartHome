@@ -1,5 +1,5 @@
-#ifndef _BIT_MATH_H_
-#define _BIT_MATH_H_
+#ifndef SMARTHOME_LIB_BIT_MATH_H_
+#define SMARTHOME_LIB_BIT_MATH_H_
 
 
 #define SET_BIT(VAR,BITNO) (VAR) |=  (1 << (BITNO))
@@ -14,4 +14,4 @@
 #include <avr/delay.h>
 
 
-#endif
+#endif /*SMARTHOME_LIB_BIT_MATH_H_*/

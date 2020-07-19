@@ -1,6 +1,6 @@
-#include "STD_TYPES.h"
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
 #include "DIO_Register.h"
-#include "BIT_Math.h"
 #include "DIO_Interface.h"
 
 void DIO_VidSetPinDirection (u8 LOC_u8Port, u8 LOC_u8Pin, u8 LOC_u8State )

@@ -1,5 +1,5 @@
-#ifndef _EXT_INTERFACE_H_
-#define _EXT_INTERFACE_H_
+#ifndef SMARTHOME_MCAL_EXT_INT_EXT_INTERFACE_H_
+#define SMARTHOME_MCAL_EXT_INT_EXT_INTERFACE_H_
 
 #define FALLING 		0
 #define RISING  		1
@@ -22,4 +22,4 @@ void EXT_VidDisable(void);
 
 
 
-#endif
+#endif  /* SMARTHOME_MCAL_EXT_INT_EXT_INTERFACE_H_ */

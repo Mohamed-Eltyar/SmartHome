@@ -1,5 +1,6 @@
-#ifndef _TIMER_COUNT_INTERFACE_H_
-#define _TIMER_COUNT_INTERFACE_H_
+/*
+#ifndef SMARTHOME_MCAL_TIMER_COUNTER_TIMER_COUNT2_REGISTER_H_
+#define SMARTHOME_MCAL_TIMER_COUNTER_TIMER_COUNT2_REGISTER_H_
 
 
 //***************** Functions of Timer/Counter 0 *****************
@@ -60,4 +61,4 @@ void __vector_11(void) __attribute__((signal));
 
 
 
-#endif
+#endif /*SMARTHOME_MCAL_TIMER_COUNTER_TIMER_COUNT2_REGISTER_H_*/

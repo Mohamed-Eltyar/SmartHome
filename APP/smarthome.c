@@ -1,0 +1,6 @@
+
+
+void smarthome(void)
+{
+
+}

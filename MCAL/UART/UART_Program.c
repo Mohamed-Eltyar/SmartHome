@@ -1,6 +1,6 @@
-#include "STD_TYPES.h"
-#include "BIT_MATH.h"
-#include "DIO_Interface.h"
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
+#include "../DIO/DIO_Interface.h"
 #include "UART_Interface.h"
 #include "UART_Register.h"
 

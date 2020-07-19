@@ -1,12 +1,12 @@
-#include "STD_TYPES.h"
-#include "BIT_MATH.h"
-#include "DIO_Interface.h"
-#include "DIO_Register.h"
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
+#include "../../MCAL/DIO/DIO_Interface.h"
+#include "../../MCAL/DIO/DIO_Register.h"
 
 
 void KeyPad_VidInit(u8 LOC_u8Port)
 {
-	DIO_VidSetPortDircection(LOC_u8Port,0x0f);
+	DIO_VidSetPortDirection(LOC_u8Port,0x0f);
 	DIO_VidSetPortValue(LOC_u8Port,0xff);
 }
 
@@ -36,4 +36,5 @@ u8 GetPressedKey(u8 LOC_u8Port)
 		}
 		DIO_VidSetPinValue(LOC_u8Port,COL,HIGH);
 	}
-	return KeyOut;}
+	return KeyOut;
+}

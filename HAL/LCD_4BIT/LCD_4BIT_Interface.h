@@ -1,17 +1,18 @@
 /*
  * LCD_4BIT.h
+
  *
  *  Created on: Jun 11, 2020
  *      Author: shafek
  */
 
-#ifndef COTS_HAL_LCD_4BIT_LCD_4BIT_INTERFACE_H_
-#define COTS_HAL_LCD_4BIT_LCD_4BIT_INTERFACE_H_
+#ifndef SMARTHOME_HAL_LCD_4BIT_LCD_4BIT_INTERFACE_H_
+#define SMARTHOME_HAL_LCD_4BIT_LCD_4BIT_INTERFACE_H_
 
 //LCD PORT CONNECTION
-#define LCD_PORT PORTD
+#define LCD_PORT 1   //PORTB
 //LCD RS AND RW AND EN HARDWER CONNECTION
-#define LCD_INIT PORTB
+#define LCD_INIT 1 //PORTB
 #define LCD_RS PIN3
 #define LCD_RW PIN4
 #define LCD_EN PIN5
@@ -44,4 +45,4 @@ void LCD_StoreCustomChr(u8* LOC_pattern, u8 LOC_CGRAM_Index);
 void LCD_Disply(u8 LOC_CGRAM_Index,u8 LOC_row,u8 LOC_col);
 
 
-#endif /* COTS_HAL_LCD_4BIT_LCD_4BIT_INTERFACE_H_ */
+#endif /* SMARTHOME_HAL_LCD_4BIT_LCD_4BIT_INTERFACE_H_ */

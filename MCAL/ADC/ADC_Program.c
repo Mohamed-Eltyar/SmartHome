@@ -1,7 +1,7 @@
-#include "STD_TYPES.h"
-#include "BIT_MATH.h"
-#include "DIO_Interface.h"
-#include "DIO_Register.h"
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
+#include "../DIO/DIO_Interface.h"
+#include "../DIO/DIO_Register.h"
 #include "ADC_Interface.h"
 #include "ADC_Register.h"
 

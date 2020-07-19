@@ -1,5 +1,5 @@
-#ifndef _ACD_INTERFACE_H_
-#define _ACD_INTERFACE_H_
+#ifndef SMARTHOME_MCAL_ADC_ACD_INTERFACE_H_
+#define SMARTHOME_MCAL_ADC_ACD_INTERFACE_H_
 
 
 void ADC_VidInit(void);
@@ -38,4 +38,4 @@ u16  ADC_u16GetDataDifferential(u8 LOC_u8Gain);
 #define Timer1OvFlow	6
 #define Timer1CapEvent	7
 
-#endif
+#endif /*SMARTHOME_MCAL_ADC_ACD_INTERFACE_H_*/

@@ -1,5 +1,5 @@
-#ifndef _STD_TYPES_H
-#define _STD_TYPES_H
+#ifndef SMARTHOME_LIB_STD_TYPES_H
+#define SMARTHOME_LIB_STD_TYPES_H
 
 #define NULL ((void*)0)
 
@@ -27,4 +27,4 @@ typedef const signed long int ks32;
 typedef const float kf32;
 typedef const double kf64;
 
-#endif
+#endif /*SMARTHOME_LIB_STD_TYPES_H*/

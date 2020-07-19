@@ -1,5 +1,5 @@
-#ifndef _DIO_INTERFACE_H_
-#define _DIO_INTERFACE_H_
+#ifndef SMARTHOME_MCAL_DIO_DIO_INTERFACE_H_
+#define SMARTHOME_MCAL_DIO_DIO_INTERFACE_H_
 
 #define PIN0 0
 #define PIN1 1
@@ -33,4 +33,4 @@ u8   DIO_u8GitPinValue (u8 LOC_u8Port, u8 LOC_u8Pin);
 
 
 
-#endif
+#endif   /* SMARTHOME_MCAL_DIO_DIO_INTERFACE_H_ */
