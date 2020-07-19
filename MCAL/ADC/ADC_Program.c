@@ -4,7 +4,14 @@
 #include "../DIO/DIO_Register.h"
 #include "ADC_Interface.h"
 #include "ADC_Register.h"
-
+static void ((*GPFunction)(void))= NULL;
+void ADC_SetCallBackF(void (*LocCALLFUNC)(void))
+{
+	if (LocCALLFUNC!=NULL)
+	{
+		GPFunction=LocCALLFUNC;
+	}
+}
 
 void ADC_VidInit(void)
 {
@@ -76,239 +83,21 @@ void ADC_VidEnable(void)
 }
 	
 	
-void ADC_VidSingleEnded(void)
+void ADC_VidSingleEnded(u8 LOC_Channel)
 {
-	#if SingleEndedCh==0
-	
-		CLR_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	
-	#elif SingleEndedCh==1
-	
-		CLR_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	
-	#elif SingleEndedCh==2
-	
-		CLR_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	
-	#elif SingleEndedCh==3
+	ADMUX&=0b11100000;               //singel ended
+	ADMUX |=LOC_Channel;              //number of channel by user
 
-		CLR_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	
-	#elif SingleEndedCh==4
-	
-		CLR_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	
-	#elif SingleEndedCh==5
-	
-		CLR_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	
-	#elif SingleEndedCh==6
-	
-		CLR_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	
-	#elif SingleEndedCh==7
-	
-		CLR_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	
-	#else
-	
-		#error "Wrong Choose Channal Single Ended!"
-	#endif
-	
+	SET_BIT(ADCSRA,PIN6);             //Start Conversion
 }
-
+/*
 u16  ADC_u16GetDataSingleEnded(void)
 {
-	
-	
 	SET_BIT(ADCSRA,PIN6);
 	while(0==GET_BIT(ADCSRA, PIN4));
-	
 	return ((ADC*5000UL)/1023);
 }
-
-void ADC_VidDifferential(void)
-{
-	#if DifferentialCh==8
-		CLR_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==9
-		CLR_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==10
-		CLR_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==11
-		CLR_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==12
-		CLR_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==13
-		CLR_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==14
-		CLR_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==15
-		CLR_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==16
-		SET_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==17
-		SET_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==18
-		SET_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==19
-		SET_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==20
-		SET_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==21
-		SET_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==22
-		SET_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==23
-		SET_BIT(ADMUX,4);
-		CLR_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==24
-		SET_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==25
-		SET_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==26
-		SET_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==27
-		SET_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		CLR_BIT(ADMUX,2);
-		SET_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-	#elif DifferentialCh==28
-		SET_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		CLR_BIT(ADMUX,0);
-	#elif DifferentialCh==29
-		SET_BIT(ADMUX,4);
-		SET_BIT(ADMUX,3);
-		SET_BIT(ADMUX,2);
-		CLR_BIT(ADMUX,1);
-		SET_BIT(ADMUX,0);
-		
-	#else
-		#error "Wrong Choose Differential Mode Channel"
-	#endif
-	
-}
-
-
-u16  ADC_u16GetDataDifferential(u8 LOC_u8Gain)
-{
-		SET_BIT(ADCSRA,PIN6);
-		while(0==GET_BIT (ADCSRA, PIN4));
-		SET_BIT(ADCSRA,PIN4);
-		return ((ADC*5000UL)/(512*LOC_u8Gain));
-}
-
+*/
 void ADC_VidAutoTriggerSource(void)
 {
 #if AutoTrigEn==1 && Trigger_Mode==FreeRunning
@@ -354,11 +143,10 @@ void ADC_VidAutoTriggerSource(void)
 #endif
 }
 
-
 ISR(ADC_VECT)
 {
-	DIO_VidSetPinValue(PRTD,PIN0,HIGH);
-	_delay_ms(1000);
-	DIO_VidSetPinValue(PRTD,PIN0,LOW);
-
+	if (GPFunction!=NULL)
+	{
+		GPFunction();
+	}
 }

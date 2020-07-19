@@ -15,7 +15,7 @@ void Timer0_VidSetCallBack(void (*Fptr)(void));
 //*********************** Configuration of Timer Register **************************
 
 // Configuration of WaveForm Generation Mode on TCCR0 bit 6 and 3
-#define WaveGen 	PWM_Phase
+#define WaveGen 	CTC
 #define Normal 		0
 #define PWM_Phase	1
 #define CTC			2

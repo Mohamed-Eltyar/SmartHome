@@ -1,14 +1,12 @@
 #ifndef SMARTHOME_MCAL_ADC_ACD_INTERFACE_H_
 #define SMARTHOME_MCAL_ADC_ACD_INTERFACE_H_
 
-
+void ADC_SetCallBackF(void (*LocCALLFUNC)(void));  //CALL BACK FUNCTION
 void ADC_VidInit(void);
 void ADC_VidEnable(void);
 void ADC_VidAutoTriggerSource(void);
-void ADC_VidSingleEnded(void);
+void ADC_VidSingleEnded(u8 LOC_Channel);
 u16  ADC_u16GetDataSingleEnded(void);
-void ADC_VidDifferential(void);
-u16  ADC_u16GetDataDifferential(u8 LOC_u8Gain);
 															/*  Gain=10:
 																	for channel: 8,9,12,13
 																Gain=200:
@@ -26,8 +24,8 @@ u16  ADC_u16GetDataDifferential(u8 LOC_u8Gain);
 #define ADC_INT_En		1	// To Enable ISR of ADC Interrupt
 
 //**************** configuration of Auto Trigger Source*****************
-#define AutoTrigEn		0	// to enable auto trigger set 1
-#define Trigger_Mode	2	// to choose mode of Auto trigger
+#define AutoTrigEn		1	// to enable auto trigger set 1
+#define Trigger_Mode	0	// to choose mode of Auto trigger
 
 #define FreeRunning		0
 #define AnalogComp		1

@@ -68,7 +68,6 @@ void LCD_VidWrite4Cmd(u8 LOC_Cmd)
 	_delay_ms(2);
 }
 
-
 void LCD_VidWrite4Data(u8 LOC_Data)
 {
 	DIO_VidSetPinValue(LCD_INIT,LCD_RS,HIGH);

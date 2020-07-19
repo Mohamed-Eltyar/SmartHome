@@ -9,5 +9,5 @@
 void main(void)
 
 {
-
+	smarthome();
 }

@@ -59,6 +59,7 @@ void Tim_Count0_VidInit(void)
 	#else
 		#error "Wrong Choose of Set Clock"
 	#endif
+	OCR0=125;
 }
 
 void Tim_Count0_VidCompOutMode(void)
@@ -101,7 +102,6 @@ void Tim_Count0_VidCompOutMode(void)
 		#endif
 	#endif
 }
-
 
 
 void Tim_Count0_VidInterruptEn(void)
@@ -149,7 +149,7 @@ void __vector_11(void) //Overflow Interrupt
 	}
 }
 
-void __vector_10(void) //Compare match Interrupt
+ISR(TIMER0_CTC_VECT) //Compare match Interrupt
 {
 	if (Tim0CallBackPtrCOMA !=NULL)
 		{
