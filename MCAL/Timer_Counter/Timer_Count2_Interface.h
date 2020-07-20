@@ -10,18 +10,14 @@
 
 //***************** Functions of Timer/Counter 2 *****************
 void Tim_Count2_VidInit(void);
-void Tim_Count2_VidCompOutMode(void);
-void Tim_Count2_VidInterruptEn(void);
-void Tim_Count2_VidCounterReg(u8 Loc_u8TCNTvalue);
 void Tim_Count2_VidCompareReg(u8 Loc_u8OCRvalue);
 
 void Timer2_VidSetCallBack(void (*Fptr)(void));
 
-
 //************** Configuration of Timer 2 Registers *****************
 
 // Configuration of WaveForm Generation Mode on TCCR0 bit 6 and 3
-#define WaveGen 	Fast_PWM
+#define Wavegen 	Fast_PWM
 #define Normal 		0
 #define PWM_Phase	1
 #define CTC			2
@@ -31,13 +27,5 @@ void Timer2_VidSetCallBack(void (*Fptr)(void));
 #define ClockSet	256		// configuration numbers are 8, 32, 64, 128, 256, 1024 or below
 #define NoClk	0
 #define NoPreScale	1
-
-// Configuration of Compare match Output For Fast PWM Mode
-
-#define FastOut			Clear
-#define Normal			0		// OC0 disconnected.
-#define Clear			2		//Clear OC0 on compare match, set OC0 at TOP (Non-Inverted)
-#define Set				3		//Set OC0 on compare match, clear OC0 at TOP (Inverted)
-
 
 #endif /* SMARTHOME_MCAL_TIMER_COUNTER_TIMER_COUNT2_INTERFACE_H_ */

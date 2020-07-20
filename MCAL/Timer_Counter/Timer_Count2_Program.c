@@ -6,16 +6,16 @@
 void Tim_Count2_VidInit(void)
 {
 	//Wave Generation Mode
-	#if WaveGen==Normal
+	#if Wavegen==Normal
 		CLR_BIT(TCCR2,WGM21);
 		CLR_BIT(TCCR2,WGM20);
-	#elif WaveGen==PWM_Phase
+	#elif Wavegen==PWM_Phase
 		CLR_BIT(TCCR2,WGM21);
 		SET_BIT(TCCR2,WGM20);
-	#elif WaveGen==CTC
+	#elif Wavegen==CTC
 		SET_BIT(TCCR2,WGM21);
 		CLR_BIT(TCCR2,WGM20);
-	#elif WaveGen==Fast_PWM
+	#elif Wavegen==Fast_PWM
 		SET_BIT(TCCR2,WGM21);
 		SET_BIT(TCCR2,WGM20);
 	#endif
@@ -55,30 +55,17 @@ void Tim_Count2_VidInit(void)
 		SET_BIT(TCCR2,CS21);
 		SET_BIT(TCCR2,CS20);
 	#endif
-}
 
-void Tim_Count2_VidCompOutMode(void)
-{
-	//for Fast PWM Mode
-		#if FastOut==Normal
-		CLR_BIT(TCCR2,COM21);
-		CLR_BIT(TCCR2,COM20);
-		#elif FastOut==Clear
+//for Fast PWM Mode Non-Inverted
 		SET_BIT(TCCR2,COM21);
 		CLR_BIT(TCCR2,COM20);
-		#elif FastOut==Set
-		SET_BIT(TCCR2,COM21);
-		SET_BIT(TCCR2,COM20);
-		#endif
-
 }
+
+
 
 void Tim_Count2_VidCompareReg(u8 Loc_u8OCRvalue)
 {
 	OCR2=Loc_u8OCRvalue;
 }
 
-void Tim_Count2_VidCounterReg(u8 Loc_u8TCNTvalue)
-{
-	TCNT2=Loc_u8TCNTvalue;
-}
+

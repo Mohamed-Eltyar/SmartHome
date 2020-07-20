@@ -3,7 +3,7 @@
 #include "Timer_Count0_Register.h"
 #include "Timer_Count0_Interface.h"
 
-static void (*Tim0CallBackPtrOVFL)(void)=NULL;
+
 static void (*Tim0CallBackPtrCOMA)(void)=NULL;
 
 void Tim_Count0_VidInit(void)
@@ -59,48 +59,16 @@ void Tim_Count0_VidInit(void)
 	#else
 		#error "Wrong Choose of Set Clock"
 	#endif
+//***********************************************************
+	//OCR Register Value
 	OCR0=125;
 }
 
 void Tim_Count0_VidCompOutMode(void)
 {
-	#if WaveGen==CTC
-		#if CopmpOut==Normal
+		//for OC0 Disconnected at CTC mode
 		CLR_BIT(TCCR0,5);
 		CLR_BIT(TCCR0,4);
-		#elif CopmpOut==Toggle
-		CLR_BIT(TCCR0,5);
-		SET_BIT(TCCR0,4);
-		#elif CopmpOut==Clear
-		SET_BIT(TCCR0,5);
-		CLR_BIT(TCCR0,4);
-		#elif CopmpOut==Set
-		SET_BIT(TCCR0,5);
-		SET_BIT(TCCR0,4);
-		#endif
-	#elif WaveGen==PWM_Phase
-		#if PhaseOut==Normal
-		CLR_BIT(TCCR0,5);
-		CLR_BIT(TCCR0,4);
-		#elif PhaseOut==Clear
-		SET_BIT(TCCR0,5);
-		CLR_BIT(TCCR0,4);
-		#elif PhaseOut==Set
-		SET_BIT(TCCR0,5);
-		SET_BIT(TCCR0,4);
-		#endif
-	#elif WaveGen==Fast_PWM
-		#if FastOut==Normal
-		CLR_BIT(TCCR0,5);
-		CLR_BIT(TCCR0,4);
-		#elif FastOut==Clear
-		SET_BIT(TCCR0,5);
-		CLR_BIT(TCCR0,4);
-		#elif FastOut==Set
-		SET_BIT(TCCR0,5);
-		SET_BIT(TCCR0,4);
-		#endif
-	#endif
 }
 
 
@@ -118,7 +86,7 @@ void Tim_Count0_VidInterruptEn(void)
 	#endif
 }
 
-void Timer0_VidSetCallBack(void (*Fptr)(void))
+void Timer0_VidSetCallBack(void (*Fptr)(void))	//Function Call back For ISR
 {
 	if (Fptr !=NULL)
 	{
