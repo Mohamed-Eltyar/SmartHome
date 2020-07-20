@@ -17,7 +17,6 @@
 
 void func_ADC_Call_Back(void);
 void func_TIMER0_CTC_Call_Back(void);
-void Sensors(void);
 
 
 #endif /* SMARTHOME_HAL_SENSORS_SENSORS_H_ */

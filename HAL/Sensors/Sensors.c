@@ -9,7 +9,10 @@
 volatile u8  flag_ADC_CHANNEL=0;
 void Sensors(void)
 {
+<<<<<<< HEAD
 	DIO_VidSetPinDirection(PRTD,PIN7,OUTPUT);
+=======
+>>>>>>> parent of 7243ef8... Light System
 	//timer0 intial
 	Tim_Count0_VidInit();
 	//timer0 interrupt enable
