@@ -10,6 +10,7 @@
 
 void func_ADC_Call_Back(void);
 void func_TIMER0_CTC_Call_Back(void);
+void Sensors(void);
 
 #define Motor_ON 255
 #define Motor_OFF 0

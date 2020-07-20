@@ -5,15 +5,19 @@
 #include "../../MCAL/ADC/ADC_Interface.h"
 #include "../../MCAL/Timer_Counter/Timer_Count0_Interface.h"
 #include "../../MCAL/Timer_Counter/Timer_Count2_Interface.h"
+#include "../LCD_4BIT/LCD_4BIT_Interface.h"
+#include "../../MCAL/GIE/GIE_Interface.h"
 #include "Sensors.h"
 volatile u8  flag_ADC_CHANNEL=0;
 void Sensors(void)
 {
-
+	SREG_VidEnable();
 	DIO_VidSetPinDirection(PRTD,PIN7,OUTPUT);
 	//DIO For LEDs & ADC
 	DIO_VidSetPortDirection(PRTA,0b00000011);	//ADC0 For Temp, ADC1 FOR LDR and others for LEDs
 	//***************
+	//LCD Configuration
+	LCD_Vid4Initialization();
 
 	//timer0 intial
 	Tim_Count0_VidInit();
@@ -31,7 +35,17 @@ void Sensors(void)
 	//ADC CALL BACK
 	ADC_SetCallBackF(func_ADC_Call_Back);
 	//TIMER CALL BACK
-	Timer0_VidSetCallBack(func_TIMER0_CTC_Call_Back);
+	//Timer0_VidSetCallBack(func_TIMER0_CTC_Call_Back);
+
+	while(1)
+		{
+		u16  anlog_value=0;
+		anlog_value = ADC_u16GetCrruntValu();
+			LCD_Write4String("Ch2 = ",1,0);
+					LCD_VidDisp4Number(anlog_value);
+					_delay_ms(500);
+		}
+
 }
 void func_ADC_Call_Back(void)
 {
@@ -39,6 +53,9 @@ void func_ADC_Call_Back(void)
 	if(flag_ADC_CHANNEL==1)             //TEMPRUTER  SHAFEK
 	{
 		anlog_value = ADC_u16GetCrruntValu();
+		LCD_Write4String("Welc ",0,0);
+		_delay_ms(500);
+			ADC_VidSingleEnded(flag_ADC_CHANNEL);
 		anlog_value= anlog_value*temprature_factor;
 		if(anlog_value>=high_temprature)
 		{
@@ -52,7 +69,12 @@ void func_ADC_Call_Back(void)
 	else if(flag_ADC_CHANNEL==0)     //LDR ELTYER
 	{
 		anlog_value = ADC_u16GetCrruntValu();
-		anlog_value	=(anlog_value*5000UL)<<10;
+		LCD_Write4String("Ch2 = ",1,0);
+				LCD_VidDisp4Number(anlog_value);
+				_delay_ms(500);
+
+		anlog_value	=(anlog_value*5000UL)/1024;
+
 		if(anlog_value>3750)
 		{
 			DIO_VidOutLED(NO_LED);
@@ -73,6 +95,6 @@ void func_ADC_Call_Back(void)
 }
 void func_TIMER0_CTC_Call_Back(void)
 {
-	ADC_VidSingleEnded(flag_ADC_CHANNEL);
-	flag_ADC_CHANNEL ^= 1;
+	//ADC_VidSingleEnded(flag_ADC_CHANNEL);
+	//flag_ADC_CHANNEL ^= 1;
 }

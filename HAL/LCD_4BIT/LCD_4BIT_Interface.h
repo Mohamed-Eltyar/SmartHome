@@ -13,9 +13,9 @@
 #define LCD_PORT PRTB   //PORTB
 //LCD RS AND RW AND EN HARDWER CONNECTION
 #define LCD_INIT  PRTB //PORTB
-#define LCD_RS PIN3
-#define LCD_RW PIN4
-#define LCD_EN PIN5
+#define LCD_RS PIN0
+#define LCD_RW PIN1
+#define LCD_EN PIN2
 //COMEND CODES
 #define SET_CGRAM_ADDRESS         0b01000000
 #define function_set_8_bit_lcd    0b00111000
