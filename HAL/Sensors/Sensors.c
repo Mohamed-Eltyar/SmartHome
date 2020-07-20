@@ -9,7 +9,6 @@
 volatile u8  flag_ADC_CHANNEL=0;
 void Sensors(void)
 {
-	DIO_VidSetPinDirection(PRTD,PIN7,OUTPUT);
 	//timer0 intial
 	Tim_Count0_VidInit();
 	//timer0 interrupt enable
@@ -35,14 +34,14 @@ void func_ADC_Call_Back(void)
 	if(flag_ADC_CHANNEL==1)             //TEMPRUTER  SHAFEK
 	{
 		anlog_value = ADC_u16GetCrruntValu();
-		anlog_value= anlog_value*temprature_factor;
-		if(anlog_value>=high_temprature)
+		anlog_value= ((anlog_value*5000UL)<<10);
+		if(anlog_value>=40)
 		{
-			Tim_Count2_VidCompareReg(Motor_ON);
+			Tim_Count2_VidCompareReg(255);
 		}
-		if(anlog_value<=low_temprature)
+		if(anlog_value<=35)
 		{
-			Tim_Count2_VidCompareReg(Motor_OFF);
+			Tim_Count2_VidCompareReg(0);
 		}
 	}
 	else if(flag_ADC_CHANNEL==0)     //LDR ELTYER

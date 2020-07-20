@@ -8,13 +8,6 @@
 #ifndef SMARTHOME_HAL_SENSORS_SENSORS_H_
 #define SMARTHOME_HAL_SENSORS_SENSORS_H_
 
-#define Motor_ON 255
-#define Motor_OFF 0
-#define high_temprature  40
-#define low_temprature    35
-#define temprature_factor  ((500UL)<<10)
-
-
 void func_ADC_Call_Back(void);
 void func_TIMER0_CTC_Call_Back(void);
 void Sensors(void);
