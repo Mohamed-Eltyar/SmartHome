@@ -9,10 +9,12 @@
 volatile u8  flag_ADC_CHANNEL=0;
 void Sensors(void)
 {
-<<<<<<< HEAD
+
 	DIO_VidSetPinDirection(PRTD,PIN7,OUTPUT);
-=======
->>>>>>> parent of 7243ef8... Light System
+	//DIO For LEDs & ADC
+	DIO_VidSetPortDirection(PRTA,0b00000011);	//ADC0 For Temp, ADC1 FOR LDR and others for LEDs
+	//***************
+
 	//timer0 intial
 	Tim_Count0_VidInit();
 	//timer0 interrupt enable
@@ -20,7 +22,6 @@ void Sensors(void)
 	//timer2 intial
 	Tim_Count2_VidInit();
 	//timer2 mode
-	Tim_Count2_VidCompOutMode();
 	//ADC INITIAL
 	ADC_VidInit();
 	//ADC ENABLE
@@ -51,6 +52,23 @@ void func_ADC_Call_Back(void)
 	else if(flag_ADC_CHANNEL==0)     //LDR ELTYER
 	{
 		anlog_value = ADC_u16GetCrruntValu();
+		anlog_value	=(anlog_value*5000UL)<<10;
+		if(anlog_value>3750)
+		{
+			DIO_VidOutLED(NO_LED);
+		}
+		else if (anlog_value>2500 && anlog_value<3750)
+		{
+			DIO_VidOutLED(Three_Quarters_LED);
+		}
+		else if (anlog_value>1250 && anlog_value<2500)
+		{
+			DIO_VidOutLED(Half_LED);
+		}
+		else if (anlog_value>0 && anlog_value<1250)
+		{
+			DIO_VidOutLED(FUll_LED);
+		}
 	}
 }
 void func_TIMER0_CTC_Call_Back(void)

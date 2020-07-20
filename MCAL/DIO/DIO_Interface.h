@@ -30,7 +30,12 @@ void DIO_VidSetPortValue (u8 LOC_u8Port, u8 LOC_u8value);
 
 u8   DIO_u8GitPinValue (u8 LOC_u8Port, u8 LOC_u8Pin);
 
-
+//-------------------------------------------------------
+void DIO_VidOutLED(u8 LOC_u8LEDs);
+#define FUll_LED		0
+#define Three_Quarters_LED	1
+#define Half_LED			2
+#define NO_LED				3
 
 
 #endif   /* SMARTHOME_MCAL_DIO_DIO_INTERFACE_H_ */
