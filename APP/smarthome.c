@@ -8,10 +8,14 @@
 void smarthome(void)
 {
 	Motors();
+	Sensors();
 	u8 GetPressedLockDoor=0;
 
 while (1)
 {
+
+
+
 	GetPressedLockDoor=GetPressedKey(PRTC);
 	if(GetPressedLockDoor==1)
 	{

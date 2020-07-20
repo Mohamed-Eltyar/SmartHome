@@ -24,41 +24,13 @@ void Tim_Count0_VidInit(void)
 		#error "Wrong Choose of Wave Generation"
 	#endif
 	
-	#if ClockSet==NoClk
-	CLR_BIT(TCCR0,2);
-	CLR_BIT(TCCR0,1);
-	CLR_BIT(TCCR0,0);
-	#elif ClockSet==NoPrescale
-	CLR_BIT(TCCR0,2);
-	CLR_BIT(TCCR0,1);
-	SET_BIT(TCCR0,0);
-	#elif ClockSet==8
-	CLR_BIT(TCCR0,2);
-	SET_BIT(TCCR0,1);
-	CLR_BIT(TCCR0,0);
-	#elif ClockSet==64
-	CLR_BIT(TCCR0,2);
-	SET_BIT(TCCR0,1);
-	SET_BIT(TCCR0,0);
-	#elif ClockSet==256
+
+
 	SET_BIT(TCCR0,2);
 	CLR_BIT(TCCR0,1);
 	CLR_BIT(TCCR0,0);
-	#elif ClockSet==1024
-	SET_BIT(TCCR0,2);
-	CLR_BIT(TCCR0,1);
-	SET_BIT(TCCR0,0);
-	#elif ClockSet==EXT_ClkFalling
-	SET_BIT(TCCR0,2);
-	SET_BIT(TCCR0,1);
-	CLR_BIT(TCCR0,0);
-	#elif ClockSet==EXT_ClkRising
-	SET_BIT(TCCR0,2);
-	SET_BIT(TCCR0,1);
-	SET_BIT(TCCR0,0);
-	#else
-		#error "Wrong Choose of Set Clock"
-	#endif
+
+
 //***********************************************************
 	//OCR Register Value
 	OCR0=125;

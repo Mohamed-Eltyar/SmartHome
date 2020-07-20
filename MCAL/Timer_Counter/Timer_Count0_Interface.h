@@ -20,7 +20,7 @@ void Timer0_VidSetCallBack(void (*Fptr)(void));
 #define Fast_PWM	3
 
 //Configuration of Interrupt Enable
-#define INT_EN		0	//To choose which mode you worked on to get the Enable on this Mode
+#define INT_EN		2	//To choose which mode you worked on to get the Enable on this Mode
 #define	OverFlow		1
 #define	CompMatch		2
 

@@ -16,10 +16,8 @@ void Sensors(void);
 #define Motor_OFF 0
 #define high_temprature  40
 #define low_temprature    35
-#define temprature_factor  ((500UL)<<10)
+#define temprature_factor  ((5000UL)<<10)
 
 #endif /* SMARTHOME_HAL_SENSORS_SENSORS_H_ */
 
-/* PRT>> for DIO
- * PORT >> for mask
- */
+
