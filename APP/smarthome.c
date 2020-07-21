@@ -10,6 +10,8 @@ void smarthome(void)
 {
 	Motors();
 	Sensors();
+	KeyPad_VidInit(PRTC);	//Initialization of Keypad and Set Its Direction
+
 u8 GetPressedLockDoor=0;
 
 while (1)

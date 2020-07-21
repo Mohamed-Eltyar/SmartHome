@@ -1,18 +1,19 @@
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
-#include "../../MCAL/GIE/GIE_Interface.h"
 #include "../../MCAL/DIO/DIO_Interface.h"
+#include "../../MCAL/GIE/GIE_Interface.h"
 #include "../../MCAL/ADC/ADC_Interface.h"
 #include "../../MCAL/Timer_Counter/Timer_Count2_Interface.h"
-#include "../../MCAL/GIE/GIE_Interface.h"
 #include "Sensors.h"
-volatile u8  flag_ADC_CHANNEL=0;
+volatile u8  flag_ADC_CHANNEL=0;	//To Change between Channels at ADC
 void Sensors(void)
 {
-
+	//Directions
 	DIO_VidSetPinDirection(PRTD,PIN7,OUTPUT);	//For Fan
 	DIO_VidSetPortDirection(PRTA,0b00000011);	//ADC1 For Temperature, ADC0 FOR LDR and others for LEDs
-	//***************
+
+	//******************************************************
+
 	SREG_VidEnable();					 //General Interrupt Enable
 
 	LCD_Vid4Initialization();			 //LCD Configuration

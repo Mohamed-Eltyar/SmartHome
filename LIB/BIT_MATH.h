@@ -23,6 +23,8 @@
 
 #define HIGH 1
 #define LOW 0
+#define Enable 1
+#define Disable 0
 
 #include <avr/delay.h>
 
