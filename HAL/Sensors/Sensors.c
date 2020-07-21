@@ -42,6 +42,7 @@ void func_ADC_Call_Back(void)
 {
 	DIO_VidSetPinValue(PRTA,PIN7,HIGH);
 	u16  anlog_value=0;
+
 	if(flag_ADC_CHANNEL==1)             //TEMPRUTER  SHAFEK
 	{
 		anlog_value = ADC_u16GetCrruntValu();

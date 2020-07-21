@@ -25,15 +25,15 @@ void Tim_Count0_VidInit(void)
 	#endif
 	
 
-
+	//Prescaler equal 1024
 	SET_BIT(TCCR0,2);
 	CLR_BIT(TCCR0,1);
-	CLR_BIT(TCCR0,0);
+	SET_BIT(TCCR0,0);
 
 
 //***********************************************************
-	//OCR Register Value
-	OCR0=125;
+	//OCR Register Value to get 25 ms
+	OCR0=195;
 }
 
 void Tim_Count0_VidCompOutMode(void)
