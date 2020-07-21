@@ -38,7 +38,7 @@ void LCD_GoToPosition(u8 row,u8 clo);
 
 void LCD_VidDisp4Number(u32 number);
 
-void LCD_VidGoto4CGRAM(void);
+//void LCD_VidGoto4CGRAM(void);    No have definition
 
 void LCD_StoreCustomChr(u8* LOC_pattern, u8 LOC_CGRAM_Index);
 
