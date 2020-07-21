@@ -7,12 +7,16 @@
 #include "../../MCAL/Timer_Counter/Timer_Count2_Interface.h"
 #include "../LCD_4BIT/LCD_4BIT_Interface.h"
 #include "../../MCAL/GIE/GIE_Interface.h"
+#include "../../HAL/KeyPad/KeyPad_Interface.h"
 #include "Sensors.h"
 volatile u8  flag_ADC_CHANNEL=0;
+extern volatile u8 arr[16];
 void Sensors(void)
 {
 	SREG_VidEnable();	//General Interrupt Enable
 	DIO_VidSetPinDirection(PRTD,PIN7,OUTPUT);
+	DIO_VidSetPinDirection(PRTD,PIN0,OUTPUT);
+
 
 	DIO_VidSetPortDirection(PRTA,0b00000011);	//ADC0 For Temp, ADC1 FOR LDR and others for LEDs
 	//***************
@@ -40,7 +44,7 @@ void Sensors(void)
 }
 void func_ADC_Call_Back(void)
 {
-	DIO_VidSetPinValue(PRTA,PIN7,HIGH);
+	arr[GetPressedKey(PRTC)]=GetPressedKey(PRTC);
 	u16  anlog_value=0;
 
 	if(flag_ADC_CHANNEL==1)             //TEMPRUTER  SHAFEK
@@ -48,9 +52,9 @@ void func_ADC_Call_Back(void)
 		anlog_value = ADC_u16GetCrruntValu();
 		LCD_Write4String("Ch1 = ",0,0);
 		ADC_VidSingleEnded(flag_ADC_CHANNEL);
+		anlog_value= anlog_value*temprature_factor;
 		LCD_VidDisp4Number(anlog_value);
 
-		anlog_value= anlog_value*temprature_factor;
 		if(anlog_value>=high_temprature)
 		{
 			Tim_Count2_VidCompareReg(Motor_ON);
@@ -64,22 +68,22 @@ void func_ADC_Call_Back(void)
 	{
 		anlog_value = ADC_u16GetCrruntValu();
 		LCD_Write4String("Ch2 = ",1,0);
-		anlog_value	=(anlog_value*5000UL)/1024;
+		//anlog_value	=(anlog_value*5000UL)/1024;
 		LCD_VidDisp4Number(anlog_value);
 
-		if(anlog_value>3750)
+		if(anlog_value>950)
 		{
 			DIO_VidOutLED(NO_LED);
 		}
-		else if (anlog_value>2500 && anlog_value<3750)
+		else if (anlog_value>713 && anlog_value<950)
 		{
 			DIO_VidOutLED(Three_Quarters_LED);
 		}
-		else if (anlog_value>1250 && anlog_value<2500)
+		else if (anlog_value>476 && anlog_value<713)
 		{
 			DIO_VidOutLED(Half_LED);
 		}
-		else if (anlog_value>0 && anlog_value<1250)
+		else if (anlog_value>0 && anlog_value<476)
 		{
 			DIO_VidOutLED(FUll_LED);
 		}
@@ -87,7 +91,6 @@ void func_ADC_Call_Back(void)
 }
 void func_TIMER0_CTC_Call_Back(void)
 {
-	DIO_VidSetPinValue(PRTA,PIN6,HIGH);
-	ADC_VidSingleEnded(flag_ADC_CHANNEL);
 	flag_ADC_CHANNEL ^= 1;
+	ADC_VidSingleEnded(flag_ADC_CHANNEL);
 }

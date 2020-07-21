@@ -16,7 +16,7 @@ void Sensors(void);
 #define Motor_OFF 0
 #define high_temprature  40
 #define low_temprature    35
-#define temprature_factor  ((5000UL)<<10)
+#define temprature_factor  ((5000UL)/1024)
 
 #endif /* SMARTHOME_HAL_SENSORS_SENSORS_H_ */
 
