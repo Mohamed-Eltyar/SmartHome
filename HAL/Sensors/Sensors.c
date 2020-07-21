@@ -42,18 +42,18 @@ void func_ADC_Call_Back(void)
 
 		if(anlog_value>=high_temprature)
 		{
-			Tim_Count2_VidCompareReg(Motor_ON);
+			Tim_Count2_VidCompareReg(Motor_ON);		//Fan On
 		}
 		if(anlog_value<=low_temprature)
 		{
-			Tim_Count2_VidCompareReg(Motor_OFF);
+			Tim_Count2_VidCompareReg(Motor_OFF);	//Fan OFF
 		}
 	}
 	else if(flag_ADC_CHANNEL==0)     //LDR ELTYER
 	{
-		anlog_value = ADC_u16GetCrruntValu();
 		ADC_VidSingleEnded(flag_ADC_CHANNEL);
-		anlog_value	=(anlog_value*5000UL)/1024;
+		anlog_value = ADC_u16GetCrruntValu();		//Store Date from ADC Register
+		anlog_value	=(anlog_value*5000UL)/1024;	    //Convert to Voltage
 
 		if(anlog_value>950)
 		{
