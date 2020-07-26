@@ -12,25 +12,13 @@ void smarthome(void)
 	Sensors();
 	KeyPad_VidInit(PRTC);	//Initialization of Keypad and Set Its Direction
 
-u8 GetPressedLockDoor=0;
+
 
 while (1)
 {
 
 
 
-GetPressedLockDoor=GetPressedKey(PRTC);
-	if(GetPressedLockDoor==1)
-	{
-		DIO_VidSetPinValue(PRTD,PIN0,HIGH);
 
-		Tim1_VidOCRA(62);
-	}
-	else if (GetPressedLockDoor==2)
-	{
-		DIO_VidSetPinValue(PRTD,PIN0,LOW);
-
-		Tim1_VidOCRA(31);
-	}
 }
 }

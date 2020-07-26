@@ -37,8 +37,8 @@ void func_ADC_Call_Back(void)
 
 	if(flag_ADC_CHANNEL==1)             //TEMPRUTER  SHAFEK
 	{
+
 		anlog_value = ADC_u16GetCrruntValu();
-		ADC_VidSingleEnded(flag_ADC_CHANNEL);
 		anlog_value= anlog_value*temprature_factor;
 
 		if(anlog_value>=high_temprature)
@@ -52,7 +52,7 @@ void func_ADC_Call_Back(void)
 	}
 	else if(flag_ADC_CHANNEL==0)     //LDR ELTYER
 	{
-		ADC_VidSingleEnded(flag_ADC_CHANNEL);
+
 		anlog_value = ADC_u16GetCrruntValu();		//Store Date from ADC Register
 		anlog_value	=(anlog_value*5000UL)/1024;	    //Convert to Voltage
 
