@@ -39,8 +39,7 @@ while (1)
 			{
 				if((username[0]==1) && (username[1]==2)&& (username[2]==3))
 				{
-					if (flag_1==1)
-					{break;}
+
 					LCD_VidWrite4Cmd(Clear_Display);
 					LCD_Write4String("user name is correct",0,0);
 					_delay_ms(1000);
@@ -128,6 +127,9 @@ while (1)
 
 			}
 		}
+		if (flag_1==1)
+		{break;}
 }
+
 }
 }
