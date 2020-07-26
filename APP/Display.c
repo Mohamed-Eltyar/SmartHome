@@ -1,8 +1,12 @@
 #include "../LIB/STD_TYPES.h"
 #include "../LIB/BIT_MATH.h"
 #include "../HAL/LCD_4BIT/LCD_4BIT_Interface.h"
-
+#include "../HAL/KeyPad/KeyPad_Interface.h"
+#include "../MCAL/ADC/ADC_Interface.h"
+#include "../MCAL/Timer_Counter/Timer_Count1_Interface.h"
+extern volatile u8 flag_ADC_CHANNEL;	   // channel adc
 u8 Display_Cursor[8]={0x10,0x18,0x1E,0x1F,0x1F,0x1E,0x18,0x10};
+
 void Display(void)
 {
 	u8 GetValue=0;				//return keypad
@@ -10,12 +14,8 @@ void Display(void)
 	LCD_Vid4Initialization();	//Initialization of LCD
 	//*****************************************************
 	// Temp =1		LDR=2		LOCk Door=3  Back=4
-
-
 	while (1)
 	{
-
-	extern flag_ADC_CHANNEL;	// channel adc
 	GetValue=GetPressedKey;
 		LCD_Write4String("1-Temp",0,1);
 		LCD_Write4String("2-Light",1,1);
@@ -112,8 +112,6 @@ void Display(void)
 		{
 			break;
 		}
-
-
 	}
 }
 
