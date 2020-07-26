@@ -61,7 +61,8 @@ while (1)
 						if (key_pad_ret_value)
 						{
 					//
-					LCD_VidDisp4Number(key_pad_ret_value);
+					//LCD_VidDisp4Number(key_pad_ret_value);
+					LCD_VidWrite4Data('*');
 					password[arrindx_pass]=key_pad_ret_value;
 					arrindx_pass++;
 					if(arrindx_pass==3)
