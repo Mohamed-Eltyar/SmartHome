@@ -108,7 +108,6 @@ void Display(void)
 				}
 			}
 		}
-
 		if (GetValue==4)
 		{
 			break;

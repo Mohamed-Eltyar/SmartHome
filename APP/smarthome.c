@@ -26,6 +26,7 @@ void smarthome(void)
 	LCD_Write4String("user name=",0,0);
 while (1)
 {
+	u8 flag_1=0;
 	key_pad_ret_value= GetPressedKey(PRTC);
 		if(key_pad_ret_value !=0 )
 		{
@@ -43,6 +44,8 @@ while (1)
 					LCD_Write4String("password=",0,0);
 					while(1)
 					{
+						if (flag_1==1)
+						{break;}
 						key_pad_ret_value= GetPressedKey(PRTC);
 						if (key_pad_ret_value)
 						{
@@ -110,6 +113,7 @@ while (1)
 								i=0;
 								arrindx=0;
 								LCD_Write4String("user name=",0,0);
+								flag_1=1;
 								break;
 							}
 						}
@@ -118,7 +122,7 @@ while (1)
 					{
 						LCD_VidWrite4Cmd(Clear_Display);
 					LCD_Write4String("user name=",0,0);
-}
+					}
 					}
 
 			}
