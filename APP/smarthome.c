@@ -9,6 +9,7 @@
 #include "../MCAL/Timer_Counter/Timer_Count1_Interface.h"
 #include "avr/delay.h"
 
+u8 Flag_ReturnHome=0;
 
 void smarthome(void)
 {
@@ -36,6 +37,7 @@ while (1)
 	while(1)
 	{
 		flag_1=0;
+		Flag_ReturnHome=0;
 
 	key_pad_ret_value= GetPressedKey(PRTC);
 		if(key_pad_ret_value !=0 )
@@ -66,8 +68,24 @@ while (1)
 					{
 						if((password[0]==3) && (password[1]==3)&& (password[2]==1))
 						{
-								Display();    //displaz function system
-
+								Display();    //display function system
+								if (Flag_ReturnHome==1)
+								{
+									username[0]=0;
+									username[1]=0;
+									username[2]=0;
+									arrindx=0;
+									i=0;
+									j=0;
+									arrindx_pass=0;
+									password[0]=0;
+									password[1]=0;
+									password[2]=0;
+									LCD_VidWrite4Cmd(Clear_Display);
+									LCD_Write4String("user name=",0,0);
+									key_pad_ret_value=0;
+									break;
+								}
 						}
 						else
 						{
@@ -150,6 +168,7 @@ while (1)
 										username[2]=0;
 										arrindx=0;
 										i=0;
+										j=0;
 										arrindx_pass=0;
 										password[0]=0;
 										password[1]=0;
@@ -159,6 +178,10 @@ while (1)
 										key_pad_ret_value=0;
 										break;
 									}
+				if (Flag_ReturnHome==1)
+				{
+					break;
+				}
 	}
 
 

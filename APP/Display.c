@@ -9,7 +9,7 @@
 #include "../MCAL/Timer_Counter/Timer_Count1_Interface.h"
 extern volatile u8 flag_ADC_CHANNEL;	   // channel adc
 u8 Display_Cursor[8]={0x10,0x18,0x1E,0x1F,0x1F,0x1E,0x18,0x10};
-
+extern u8 Flag_ReturnHome;
 void Display(void)
 {
 	u8 GetValue=0;				//return keypad
@@ -143,8 +143,13 @@ void Display(void)
 		if (GetValue==4)
 		{
 			GetValue=0;
+			Flag_ReturnHome=1;
 			break;
 		}
+	}
+	if (Flag_ReturnHome==1)
+	{
+		break;
 	}
 	}
 }
