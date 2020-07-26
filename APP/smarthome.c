@@ -9,6 +9,7 @@
 #include "../MCAL/Timer_Counter/Timer_Count1_Interface.h"
 #include "avr/delay.h"
 
+
 void smarthome(void)
 {
 	u8 username[3];
@@ -18,17 +19,24 @@ void smarthome(void)
 	u8 i=0;
 	u8 j=0;
 	u8 key_pad_ret_value=0;
+	u8 flag_1=0;
+
 	Motors();
 	Sensors();
 	KeyPad_VidInit(PRTC);	//Initialization of Keypad and Set Its Direction
 	LCD_Vid4Initialization();
 	LCD_VidWrite4Cmd(Clear_Display);
-	LCD_Write4String("user name=",0,0);
+	LCD_Write4String("User name=",0,0);
+
+
 while (1)
 {
+	flag_1=0;
+
 	while(1)
 	{
-	u8 flag_1=0;
+		flag_1=0;
+
 	key_pad_ret_value= GetPressedKey(PRTC);
 		if(key_pad_ret_value !=0 )
 		{
@@ -37,7 +45,7 @@ while (1)
 			arrindx++;
 			if(arrindx==3)
 			{
-				if((username[0]==1) && (username[1]==2)&& (username[2]==3))
+				if((username[0]==1) && (username[1]==3)&& (username[2]==3))
 				{
 
 					LCD_VidWrite4Cmd(Clear_Display);
@@ -56,7 +64,7 @@ while (1)
 					arrindx_pass++;
 					if(arrindx_pass==3)
 					{
-						if((password[0]==3) && (password[1]==2)&& (password[2]==1))
+						if((password[0]==3) && (password[1]==3)&& (password[2]==1))
 						{
 								Display();    //displaz function system
 
@@ -74,16 +82,20 @@ while (1)
 									LCD_Write4String("no more try",0,0);
 									while(1)
 									{
+
 										key_pad_ret_value= GetPressedKey(PRTC);
 										if (key_pad_ret_value==14)
 										{
+											flag_1=1;
 											LCD_VidWrite4Cmd(Clear_Display);
 																						j=0;
 																						arrindx_pass=0;
-																						LCD_Write4String("password=",0,0);
+
 																						break;
 																					}
 																				}
+									if (flag_1==1)
+										{break;}
 																			}
 																			else if(j<3)
 																			{
@@ -92,7 +104,9 @@ while (1)
 																	}
 												}
 											}
+
 				}
+
 				else
 				{
 					LCD_VidWrite4Cmd(Clear_Display);
@@ -127,9 +141,26 @@ while (1)
 
 			}
 		}
-		if (flag_1==1)
-		{break;}
-}
+
+
+									if (flag_1==1)
+									{
+										username[0]=0;
+										username[1]=0;
+										username[2]=0;
+										arrindx=0;
+										i=0;
+										arrindx_pass=0;
+										password[0]=0;
+										password[1]=0;
+										password[2]=0;
+										LCD_VidWrite4Cmd(Clear_Display);
+										LCD_Write4String("user name=",0,0);
+										key_pad_ret_value=0;
+										break;
+									}
+	}
+
 
 }
 }

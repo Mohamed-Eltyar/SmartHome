@@ -39,7 +39,7 @@ void func_ADC_Call_Back(void)
 	{
 
 		anlog_value = ADC_u16GetCrruntValu();
-		anlog_value= anlog_value*temprature_factor;
+		//anlog_value= anlog_value*temprature_factor;
 
 		if(anlog_value>=high_temprature)
 		{
@@ -54,21 +54,21 @@ void func_ADC_Call_Back(void)
 	{
 
 		anlog_value = ADC_u16GetCrruntValu();		//Store Date from ADC Register
-		anlog_value	=(anlog_value*5000UL)/1024;	    //Convert to Voltage
+		//anlog_value	=(anlog_value*5000UL)/1024;	    Convert to Voltage
 
-		if(anlog_value>950)
+		if(anlog_value>200)
 		{
 			DIO_VidOutLED(NO_LED);
 		}
-		else if (anlog_value>713 && anlog_value<950)
+		else if (anlog_value>150 && anlog_value<200)
 		{
 			DIO_VidOutLED(Three_Quarters_LED);
 		}
-		else if (anlog_value>476 && anlog_value<713)
+		else if (anlog_value>50 && anlog_value<150)
 		{
 			DIO_VidOutLED(Half_LED);
 		}
-		else if (anlog_value>0 && anlog_value<476)
+		else if (anlog_value>0 && anlog_value<50)
 		{
 			DIO_VidOutLED(FUll_LED);
 		}

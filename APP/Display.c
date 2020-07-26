@@ -4,6 +4,8 @@
 #include "../HAL/LCD_4BIT/LCD_4BIT_Interface.h"
 #include "../HAL/KeyPad/KeyPad_Interface.h"
 #include "../MCAL/ADC/ADC_Interface.h"
+#include "../MCAL/ADC/ADC_Register.h"
+#include "../MCAL/Timer_Counter/Timer_Count2_Interface.h"
 #include "../MCAL/Timer_Counter/Timer_Count1_Interface.h"
 extern volatile u8 flag_ADC_CHANNEL;	   // channel adc
 u8 Display_Cursor[8]={0x10,0x18,0x1E,0x1F,0x1F,0x1E,0x18,0x10};
@@ -17,11 +19,16 @@ void Display(void)
 	// Temp =1		LDR=2		LOCk Door=3  Back=4
 	while (1)
 	{
-	GetValue=GetPressedKey(PRTC);
+		while (1)
+		{
+			SET_BIT(ADCSRA,7);
+		LCD_VidWrite4Cmd(Clear_Display);
+		GetValue=GetPressedKey(PRTC);
 		LCD_Write4String("1-Temp",0,1);
 		LCD_Write4String("2-Light",1,1);
 		LCD_Write4String("3-Door",0,9);
 		LCD_Write4String("4-Back",1,10);
+		_delay_ms(100);
 
 		if (GetValue==1)
 		{
@@ -29,13 +36,15 @@ void Display(void)
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
 			while (1)
 			{
+				LCD_VidWrite4Cmd(Clear_Display);
 				GetValue=GetPressedKey(PRTC);
 				GetADC_Value=ADC_u16GetCrruntValu();
-				GetADC_Value=(GetADC_Value*5000UL)/1024;
+				//GetADC_Value=(GetADC_Value*5000UL)/1024;
 				LCD_Write4String("Temp=",0,0);
 				LCD_GoToPosition(0,7);
 				LCD_VidDisp4Number(GetADC_Value);
 				LCD_Write4String("C",0,10);
+				_delay_ms(100);
 			if (GetADC_Value>40)
 			{
 				LCD_Write4String("Fan ON",1,4);
@@ -47,25 +56,31 @@ void Display(void)
 			}
 			if (GetValue==4)
 			{
+				GetValue=0;
+				Tim_Count2_VidCompareReg(0);
+				CLR_BIT(ADCSRA,7);
+
 				break;
 			}
 			}
 		}
 
-		if (GetValue==2)
+		if (GetValue==7)
 		{
 			flag_ADC_CHANNEL=0;
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
 			while(1)
 			{
+				LCD_VidWrite4Cmd(Clear_Display);
 				GetValue=GetPressedKey(PRTC);
 				GetADC_Value=ADC_u16GetCrruntValu();
-				GetADC_Value=(GetADC_Value*5000UL)/1024;
-				GetADC_Value=(GetADC_Value/5000)*100;	//percentage
+				//GetADC_Value=(10000*5000UL)
+				//GetADC_Value=(GetADC_Value/5000)*100;	percentage
 				LCD_Write4String("Light=",0,0);
 				LCD_GoToPosition(0,8);
 				LCD_VidDisp4Number(GetADC_Value);
 				LCD_Write4String("%",0,11);
+				_delay_ms(100);
 				if (GetADC_Value>75)
 				{
 					LCD_Write4String("NO Light",1,3);
@@ -84,6 +99,9 @@ void Display(void)
 				}
 				if (GetValue==4)
 				{
+					GetValue=0;
+					CLR_BIT(ADCSRA,7);
+					DIO_VidSetPortValue(PRTA,0x00);
 					break;
 				}
 			}
@@ -93,25 +111,41 @@ void Display(void)
 		{
 			while (1)
 			{
+
+				LCD_Write4String("Door Lock:",0,0);
+				_delay_ms(250);
 				GetValue=GetPressedKey(PRTC);
 				if (GetValue==5)	//Open door
 				{
+					LCD_VidWrite4Cmd(Clear_Display);
+					LCD_Write4String("Door Lock:",0,0);
+					LCD_Write4String(" ON",0,11);
 					Tim1_VidOCRA(62);
+					_delay_ms(500);
+
 				}
 				else if (GetValue==6)	//closed door
 				{
+					LCD_VidWrite4Cmd(Clear_Display);
+					LCD_Write4String("Door Lock:",0,0);
+					LCD_Write4String(" OFF",0,11);
 					Tim1_VidOCRA(31);
+					_delay_ms(500);
+
 				}
 				if (GetValue==4)
 				{
+					GetValue=0;
 					break;
 				}
 			}
 		}
 		if (GetValue==4)
 		{
+			GetValue=0;
 			break;
 		}
+	}
 	}
 }
 
