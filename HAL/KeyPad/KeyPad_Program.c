@@ -12,7 +12,7 @@ void KeyPad_VidInit(u8 LOC_u8Port)
 
 u8 GetPressedKey(u8 LOC_u8Port)
 {
-	u8 KeyOut=-1;
+	u8 KeyOut=0;
 	u8 ROW;
 	u8 COL;
 	u8 KEY_NUM[4][4]={			{1 ,2 ,3 ,11 },

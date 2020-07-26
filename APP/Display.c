@@ -1,5 +1,6 @@
 #include "../LIB/STD_TYPES.h"
 #include "../LIB/BIT_MATH.h"
+#include "../MCAL/DIO/DIO_Interface.h"
 #include "../HAL/LCD_4BIT/LCD_4BIT_Interface.h"
 #include "../HAL/KeyPad/KeyPad_Interface.h"
 #include "../MCAL/ADC/ADC_Interface.h"
@@ -16,7 +17,7 @@ void Display(void)
 	// Temp =1		LDR=2		LOCk Door=3  Back=4
 	while (1)
 	{
-	GetValue=GetPressedKey;
+	GetValue=GetPressedKey(PRTC);
 		LCD_Write4String("1-Temp",0,1);
 		LCD_Write4String("2-Light",1,1);
 		LCD_Write4String("3-Door",0,9);
@@ -28,7 +29,7 @@ void Display(void)
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
 			while (1)
 			{
-				GetValue=GetPressedKey;
+				GetValue=GetPressedKey(PRTC);
 				GetADC_Value=ADC_u16GetCrruntValu();
 				GetADC_Value=(GetADC_Value*5000UL)/1024;
 				LCD_Write4String("Temp=",0,0);
@@ -57,7 +58,7 @@ void Display(void)
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
 			while(1)
 			{
-				GetValue=GetPressedKey;
+				GetValue=GetPressedKey(PRTC);
 				GetADC_Value=ADC_u16GetCrruntValu();
 				GetADC_Value=(GetADC_Value*5000UL)/1024;
 				GetADC_Value=(GetADC_Value/5000)*100;	//percentage
@@ -92,7 +93,7 @@ void Display(void)
 		{
 			while (1)
 			{
-				GetValue=GetPressedKey;
+				GetValue=GetPressedKey(PRTC);
 				if (GetValue==5)	//Open door
 				{
 					Tim1_VidOCRA(62);

@@ -26,8 +26,8 @@ void smarthome(void)
 	LCD_Write4String("user name=",0,0);
 while (1)
 {
-	key_pad_ret_value= GetPressedKey;
-		if(key_pad_ret_value)
+	key_pad_ret_value= GetPressedKey(PRTC);
+		if(key_pad_ret_value !=0 )
 		{
 			LCD_VidDisp4Number(key_pad_ret_value);
 			username[arrindx]=key_pad_ret_value;
@@ -41,39 +41,39 @@ while (1)
 					_delay_ms(1000);
 					LCD_VidWrite4Cmd(Clear_Display);
 					LCD_Write4String("password=",0,0);
-														while(1)
-															{
-																key_pad_ret_value= GetPressedKey;
-																if (key_pad_ret_value)
-																	{
-															//	/*
-																	LCD_VidDisp4Number(key_pad_ret_value);
-																	password[arrindx_pass]=key_pad_ret_value;
-																	arrindx_pass++;
-																	if(arrindx_pass==3)
-																	{
-																		if((password[0]==3) && (password[1]==2)&& (password[2]==1))
-																		{
-																			Display();    //displaz function system
+					while(1)
+					{
+						key_pad_ret_value= GetPressedKey(PRTC);
+						if (key_pad_ret_value)
+						{
+					//
+					LCD_VidDisp4Number(key_pad_ret_value);
+					password[arrindx_pass]=key_pad_ret_value;
+					arrindx_pass++;
+					if(arrindx_pass==3)
+					{
+						if((password[0]==3) && (password[1]==2)&& (password[2]==1))
+						{
+								Display();    //displaz function system
 
-																		}
-																		else
-																		{
-																			LCD_VidWrite4Cmd(Clear_Display);
-																			LCD_Write4String("password is wrong",0,0);
-																			_delay_ms(1000);
-																			arrindx_pass=0;
-																			j++;
-																			LCD_VidWrite4Cmd(Clear_Display);
-																			if(j==3)
-																			{
-																				LCD_Write4String("no more try",0,0);
-																				while(1)
-																				{
-																					key_pad_ret_value= GetPressedKey;
-																					if (key_pad_ret_value==99)
-																					{
-																						LCD_VidWrite4Cmd(Clear_Display);
+						}
+						else
+						{
+							LCD_VidWrite4Cmd(Clear_Display);
+							LCD_Write4String("password is wrong",0,0);
+							_delay_ms(1000);
+							arrindx_pass=0;
+							j++;
+							LCD_VidWrite4Cmd(Clear_Display);
+							if(j==3)
+								{
+									LCD_Write4String("no more try",0,0);
+									while(1)
+									{
+										key_pad_ret_value= GetPressedKey(PRTC);
+										if (key_pad_ret_value==14)
+										{
+											LCD_VidWrite4Cmd(Clear_Display);
 																						j=0;
 																						arrindx_pass=0;
 																						LCD_Write4String("password=",0,0);
@@ -94,6 +94,7 @@ while (1)
 					LCD_VidWrite4Cmd(Clear_Display);
 					LCD_Write4String("user name is wrong",0,0);
 					_delay_ms(1000);
+
 					arrindx=0;
 					i++;
 					LCD_VidWrite4Cmd(Clear_Display);
@@ -102,8 +103,8 @@ while (1)
 						LCD_Write4String("no more try",0,0);
 						while(1)
 						{
-							key_pad_ret_value= GetPressedKey;
-							if (key_pad_ret_value==99)
+							key_pad_ret_value= GetPressedKey(PRTC);
+							if (key_pad_ret_value==14)
 							{
 								LCD_VidWrite4Cmd(Clear_Display);
 								i=0;
@@ -115,7 +116,9 @@ while (1)
 					}
 					else if(i<3)
 					{
-					LCD_Write4String("user name=",0,0);}
+						LCD_VidWrite4Cmd(Clear_Display);
+					LCD_Write4String("user name=",0,0);
+}
 					}
 
 			}
