@@ -27,7 +27,7 @@ void smarthome(void)
 	KeyPad_VidInit(PRTC);	//Initialization of Keypad and Set Its Direction
 	LCD_Vid4Initialization();
 	LCD_VidWrite4Cmd(Clear_Display);
-	LCD_Write4String("User name=",0,0);
+	LCD_Write4String("User Name:",0,0);
 
 
 while (1)
@@ -51,10 +51,10 @@ while (1)
 				{
 
 					LCD_VidWrite4Cmd(Clear_Display);
-					LCD_Write4String("user name is correct",0,0);
+					LCD_Write4String("Correct",0,0);
 					_delay_ms(1000);
 					LCD_VidWrite4Cmd(Clear_Display);
-					LCD_Write4String("password=",0,0);
+					LCD_Write4String("Password:",0,0);
 					while(1)
 					{
 						key_pad_ret_value= GetPressedKey(PRTC);
@@ -83,7 +83,7 @@ while (1)
 									password[1]=0;
 									password[2]=0;
 									LCD_VidWrite4Cmd(Clear_Display);
-									LCD_Write4String("user name=",0,0);
+									LCD_Write4String("User Name:",0,0);
 									key_pad_ret_value=0;
 									break;
 								}
@@ -91,14 +91,14 @@ while (1)
 						else
 						{
 							LCD_VidWrite4Cmd(Clear_Display);
-							LCD_Write4String("password is wrong",0,0);
+							LCD_Write4String(" Wrong",0,0);
 							_delay_ms(1000);
 							arrindx_pass=0;
 							j++;
 							LCD_VidWrite4Cmd(Clear_Display);
 							if(j==3)
 								{
-									LCD_Write4String("no more try",0,0);
+									LCD_Write4String("No try Prs 14",0,0);
 									while(1)
 									{
 
@@ -118,7 +118,7 @@ while (1)
 																			}
 																			else if(j<3)
 																			{
-																			LCD_Write4String("password=",0,0);}
+																			LCD_Write4String("Password:",0,0);}
 																			}
 																	}
 												}
@@ -129,14 +129,14 @@ while (1)
 				else
 				{
 					LCD_VidWrite4Cmd(Clear_Display);
-					LCD_Write4String("user name is wrong",0,0);
+					LCD_Write4String("Wrong",0,0);
 					_delay_ms(1000);
 					arrindx=0;
 					i++;
 					LCD_VidWrite4Cmd(Clear_Display);
 					if(i==3)
 					{
-						LCD_Write4String("no more try",0,0);
+						LCD_Write4String("No try Prs 14",0,0);
 						while(1)
 						{
 							key_pad_ret_value= GetPressedKey(PRTC);
@@ -145,7 +145,7 @@ while (1)
 								LCD_VidWrite4Cmd(Clear_Display);
 								i=0;
 								arrindx=0;
-								LCD_Write4String("user name=",0,0);
+								LCD_Write4String("User Name:",0,0);
 								flag_1=1;
 								break;
 							}
@@ -154,7 +154,7 @@ while (1)
 					else if(i<3)
 					{
 						LCD_VidWrite4Cmd(Clear_Display);
-					LCD_Write4String("user name=",0,0);
+					LCD_Write4String("User Name:",0,0);
 					}
 					}
 
@@ -175,7 +175,7 @@ while (1)
 										password[1]=0;
 										password[2]=0;
 										LCD_VidWrite4Cmd(Clear_Display);
-										LCD_Write4String("user name=",0,0);
+										LCD_Write4String("User Name:",0,0);
 										key_pad_ret_value=0;
 										break;
 									}
