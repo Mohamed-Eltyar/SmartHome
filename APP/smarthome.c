@@ -7,6 +7,7 @@
 #include "../HAL/LCD_4BIT/LCD_4BIT_Interface.h"
 #include "../HAL/KeyPad/KeyPad_Interface.h"
 #include "../MCAL/Timer_Counter/Timer_Count1_Interface.h"
+#include "avr/delay.h"
 
 void smarthome(void)
 {
