@@ -21,6 +21,8 @@ void Display(void)
 	{
 		while (1)
 		{
+			if(GetValue==0)
+			{
 			SET_BIT(ADCSRA,7);
 		LCD_VidWrite4Cmd(Clear_Display);
 		GetValue=GetPressedKey(PRTC);
@@ -29,7 +31,7 @@ void Display(void)
 		LCD_Write4String("3-Door",0,9);
 		LCD_Write4String("4-Back",1,10);
 		_delay_ms(100);
-
+			}
 		if (GetValue==1)
 		{
 			flag_ADC_CHANNEL=1;
