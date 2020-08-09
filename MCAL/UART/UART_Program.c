@@ -112,8 +112,13 @@ void UART_VidSendData(u8 data)
 
 u8 UART_u8ReadData(void)
 {
+	u8 retData=0;
 	while(!GET_BIT(UCSRA,RXC))
-	{ /* wait for data to be received */ }
+	{
+		/* wait for data to be received */
 
-	return UDR;
+
+ }
+	retData=UDR-48;
+	return retData;
 }

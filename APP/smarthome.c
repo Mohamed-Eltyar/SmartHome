@@ -27,15 +27,18 @@ void smarthome(void)
 	Sensors();
 	KeyPad_VidInit(PRTC);	//Initialization of Keypad and Set Its Direction
 	LCD_Vid4Initialization();
-		LCD_Write4String("System",0,0);
-		LCD_Write4String("1-UART",1,1);
-		LCD_Write4String("2-KeyPad",1,7);
+	LCD_Write4String("System",0,0);
+	_delay_ms(2500);
+	LCD_VidWrite4Cmd(Clear_Display);
+	LCD_Write4String("1-UART",0,0);
+	LCD_Write4String("2-KeyPad",0,7);
 
 	while (1)
 	{
 		key_pad_ret_value=GetPressedKey(PRTC);
 		UART_retValue=UART_u8ReadData();
-		UART_VidSendData(UART_retValue);
+
+
 		if (key_pad_ret_value==2)
 		{
 			System=2;
@@ -44,6 +47,7 @@ void smarthome(void)
 		if (UART_retValue==1)
 		{
 			System=1;
+
 			break;
 		}
 
@@ -311,12 +315,12 @@ void UARTSystem(void)
 									LCD_VidWrite4Cmd(Clear_Display);
 									if(j==3)
 										{
-											LCD_Write4String("No try Prs 14",0,0);
+											LCD_Write4String("No try Prs 9",0,0);
 											while(1)
 											{
 
 												UART_retValue=UART_u8ReadData();
-												if (UART_retValue==14)
+												if (UART_retValue==9)
 												{
 													flag_1=1;
 													LCD_VidWrite4Cmd(Clear_Display);
@@ -349,11 +353,11 @@ void UARTSystem(void)
 							LCD_VidWrite4Cmd(Clear_Display);
 							if(i==3)
 							{
-								LCD_Write4String("No try Prs 14",0,0);
+								LCD_Write4String("No try Prs 9",0,0);
 								while(1)
 								{
 									UART_retValue= UART_u8ReadData();
-									if (UART_retValue==14)
+									if (UART_retValue==9)
 									{
 										LCD_VidWrite4Cmd(Clear_Display);
 										i=0;

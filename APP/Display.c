@@ -13,6 +13,7 @@ extern u8 Flag_ReturnHome;
 void Display(void)
 {
 	u8 GetValue=0;				//return keypad
+	u8 GetUARTValue=0;			// Return UART
 	u16 GetADC_Value=0;			//get ADC value
 	LCD_Vid4Initialization();	//Initialization of LCD
 	//*****************************************************
@@ -21,17 +22,19 @@ void Display(void)
 	{
 		while (1)
 		{
-			if(GetValue==0)
+			if(GetValue==0 || GetUARTValue==0)
 			{
 			SET_BIT(ADCSRA,7);
-		GetValue=GetPressedKey(PRTC);
+
 		LCD_Write4String("1-Temp",0,1);
 		LCD_Write4String("2-Light",1,1);
 		LCD_Write4String("3-Door",0,9);
 		LCD_Write4String("4-Back",1,10);
+		GetValue=GetPressedKey(PRTC);
+		GetUARTValue=UART_u8ReadData();
 		_delay_ms(100);
 			}
-		if (GetValue==1)
+		if (GetValue==1 || GetUARTValue==1)
 		{
 			flag_ADC_CHANNEL=1;
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
@@ -40,6 +43,7 @@ void Display(void)
 			while (1)
 			{
 				GetValue=GetPressedKey(PRTC);
+				GetUARTValue=UART_u8ReadData();
 				GetADC_Value=ADC_u16GetCrruntValu();
 				//GetADC_Value=(GetADC_Value*5000UL)/1024;
 				LCD_Write4String("Temp=",0,0);
@@ -56,9 +60,10 @@ void Display(void)
 			{
 				LCD_Write4String("Fan OFF",1,4);
 			}
-			if (GetValue==4)
+			if (GetValue==4 || GetUARTValue==4)
 			{
 				GetValue=0;
+				GetUARTValue=0;
 				Tim_Count2_VidCompareReg(0);
 				CLR_BIT(ADCSRA,7);
 				LCD_VidWrite4Cmd(Clear_Display);
@@ -68,7 +73,7 @@ void Display(void)
 			}
 		}
 
-		if (GetValue==7)
+		if (GetValue==7 || GetUARTValue==7)
 		{
 			flag_ADC_CHANNEL=0;
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
@@ -77,6 +82,7 @@ void Display(void)
 			while(1)
 			{
 				GetValue=GetPressedKey(PRTC);
+				GetUARTValue=UART_u8ReadData();
 				GetADC_Value=ADC_u16GetCrruntValu();
 				//GetADC_Value=(10000*5000UL)
 				//GetADC_Value=(GetADC_Value/5000)*100;	percentage
@@ -101,9 +107,10 @@ void Display(void)
 				{
 					LCD_Write4String(" Full Light",1,0);
 				}
-				if (GetValue==4)
+				if (GetValue==4 || GetUARTValue==4)
 				{
 					GetValue=0;
+					GetUARTValue=0;
 					CLR_BIT(ADCSRA,7);
 					DIO_VidSetPortValue(PRTA,0x00);
 					LCD_VidWrite4Cmd(Clear_Display);
@@ -113,7 +120,7 @@ void Display(void)
 			}
 		}
 
-		if (GetValue==3)
+		if (GetValue==3 || GetUARTValue==3)
 		{
 			while (1)
 			{
@@ -121,7 +128,8 @@ void Display(void)
 				LCD_Write4String("Door Lock:",0,0);
 				_delay_ms(250);
 				GetValue=GetPressedKey(PRTC);
-				if (GetValue==5)	//Open door
+				GetUARTValue=UART_u8ReadData();
+				if (GetValue==5 || GetUARTValue==5)	//Open door
 				{
 					LCD_VidWrite4Cmd(Clear_Display);
 					LCD_Write4String("Door Lock:",0,0);
@@ -130,7 +138,7 @@ void Display(void)
 					_delay_ms(500);
 
 				}
-				else if (GetValue==6)	//closed door
+				else if (GetValue==6 || GetUARTValue==6)	//closed door
 				{
 					LCD_VidWrite4Cmd(Clear_Display);
 					LCD_Write4String("Door Lock:",0,0);
@@ -139,18 +147,20 @@ void Display(void)
 					_delay_ms(500);
 
 				}
-				if (GetValue==4)
+				if (GetValue==4 || GetUARTValue==4)
 				{
 					GetValue=0;
+					GetUARTValue=0;
 					LCD_VidWrite4Cmd(Clear_Display);
 
 					break;
 				}
 			}
 		}
-		if (GetValue==4)
+		if (GetValue==4 || GetUARTValue==4)
 		{
 			GetValue=0;
+			GetUARTValue=0;
 			Flag_ReturnHome=1;
 			break;
 		}
