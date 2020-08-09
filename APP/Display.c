@@ -24,7 +24,6 @@ void Display(void)
 			if(GetValue==0)
 			{
 			SET_BIT(ADCSRA,7);
-		LCD_VidWrite4Cmd(Clear_Display);
 		GetValue=GetPressedKey(PRTC);
 		LCD_Write4String("1-Temp",0,1);
 		LCD_Write4String("2-Light",1,1);
@@ -36,9 +35,10 @@ void Display(void)
 		{
 			flag_ADC_CHANNEL=1;
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
+			LCD_VidWrite4Cmd(Clear_Display);
+
 			while (1)
 			{
-				LCD_VidWrite4Cmd(Clear_Display);
 				GetValue=GetPressedKey(PRTC);
 				GetADC_Value=ADC_u16GetCrruntValu();
 				//GetADC_Value=(GetADC_Value*5000UL)/1024;
@@ -46,7 +46,7 @@ void Display(void)
 				LCD_GoToPosition(0,7);
 				LCD_VidDisp4Number(GetADC_Value);
 				LCD_Write4String("C",0,10);
-				_delay_ms(100);
+				//_delay_ms(100);
 			if (GetADC_Value>40)
 			{
 				LCD_Write4String("Fan ON",1,4);
@@ -61,6 +61,7 @@ void Display(void)
 				GetValue=0;
 				Tim_Count2_VidCompareReg(0);
 				CLR_BIT(ADCSRA,7);
+				LCD_VidWrite4Cmd(Clear_Display);
 
 				break;
 			}
@@ -71,9 +72,10 @@ void Display(void)
 		{
 			flag_ADC_CHANNEL=0;
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
+			LCD_VidWrite4Cmd(Clear_Display);
+
 			while(1)
 			{
-				LCD_VidWrite4Cmd(Clear_Display);
 				GetValue=GetPressedKey(PRTC);
 				GetADC_Value=ADC_u16GetCrruntValu();
 				//GetADC_Value=(10000*5000UL)
@@ -104,6 +106,8 @@ void Display(void)
 					GetValue=0;
 					CLR_BIT(ADCSRA,7);
 					DIO_VidSetPortValue(PRTA,0x00);
+					LCD_VidWrite4Cmd(Clear_Display);
+
 					break;
 				}
 			}
@@ -138,6 +142,8 @@ void Display(void)
 				if (GetValue==4)
 				{
 					GetValue=0;
+					LCD_VidWrite4Cmd(Clear_Display);
+
 					break;
 				}
 			}

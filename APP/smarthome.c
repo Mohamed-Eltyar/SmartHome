@@ -70,6 +70,7 @@ while (1)
 					{
 						if((password[0]==3) && (password[1]==3)&& (password[2]==1))
 						{
+							LCD_VidWrite4Cmd(Clear_Display);
 								Display();    //display function system
 								if (Flag_ReturnHome==1)
 								{
