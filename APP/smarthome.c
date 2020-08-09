@@ -21,25 +21,21 @@ void smarthome(void)
 	u8 UART_retValue=0;
 	u8 System=0;
 
-	LCD_Vid4Initialization();
-	LCD_VidWrite4Data('w');
-	_delay_ms(5000);
-		LCD_Write4String("System",0,0);
-		LCD_Write4String("1-UART",1,0);
-		LCD_Write4String("2-KeyPad",1,7);
-
-
 	//BuadRate
 	UART_VidInit(9600);
 	Motors();
 	Sensors();
 	KeyPad_VidInit(PRTC);	//Initialization of Keypad and Set Its Direction
-	DIO_VidSetPinValue(PRTA,PIN6,HIGH);
+	LCD_Vid4Initialization();
+		LCD_Write4String("System",0,0);
+		LCD_Write4String("1-UART",1,1);
+		LCD_Write4String("2-KeyPad",1,7);
 
 	while (1)
 	{
 		key_pad_ret_value=GetPressedKey(PRTC);
 		UART_retValue=UART_u8ReadData();
+		UART_VidSendData(UART_retValue);
 		if (key_pad_ret_value==2)
 		{
 			System=2;
