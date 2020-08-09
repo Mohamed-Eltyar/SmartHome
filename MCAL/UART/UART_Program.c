@@ -13,7 +13,8 @@ void UART_VidInit(u16 LOC_u16BaudRate)
 	UBRRL=UBRR;
 	UBRRH=0;
 
-
+	DIO_VidSetPinDirection(PRTD,PIN0,INPUT);
+	DIO_VidSetPinDirection(PRTD,PIN1,OUTPUT);
 
 	//Enable double speed
 	#if DoubleSpeed==0
