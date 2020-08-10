@@ -122,3 +122,18 @@ u8 UART_u8ReadData(void)
 	retData=UDR-48;
 	return retData;
 }
+
+
+u8 UART_u8ReadDataNoWait(void)
+{
+	u8 retData=0;
+		while(!GET_BIT(UCSRA,RXC))
+		{
+			/* wait for data to be received */
+			_delay_ms(300);
+			break;
+
+	 }
+		retData=UDR-48;
+		return retData;
+}

@@ -5,7 +5,7 @@
 void UART_VidInit(u16 LOC_u16BuadRate);
 void UART_VidSendData(u8 data);
 u8 UART_u8ReadData(void);
-
+u8 UART_u8ReadDataNoWait(void);
 
 
 #define DoubleSpeed  	0	//to Enable Set	1
