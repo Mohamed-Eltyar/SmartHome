@@ -292,7 +292,7 @@ void UARTSystem(void)
 								if((password[0]==3) && (password[1]==3)&& (password[2]==1))
 								{
 									LCD_Write4String("Correct Pass",0,0);
-									_delay_ms(100);
+									_delay_ms(1000);
 									LCD_Write4String("Welcome Smart",0,0);
 									_delay_ms(1500);
 									LCD_VidWrite4Cmd(Clear_Display);
