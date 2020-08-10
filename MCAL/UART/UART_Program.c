@@ -118,6 +118,7 @@ u8 UART_u8ReadData(void)
 		if(1==Flag_UART)
 		{
 			_delay_ms(300);
+
 			break;
 		}
 		/* wait for data to be received */

@@ -10,6 +10,7 @@
 extern volatile u8 flag_ADC_CHANNEL;	   // channel adc
 u8 Display_Cursor[8]={0x10,0x18,0x1E,0x1F,0x1F,0x1E,0x18,0x10};
 extern u8 Flag_ReturnHome;
+extern u8 System;
 u8 Flag_UART =0;
 void Display(void)
 {
@@ -26,7 +27,10 @@ void Display(void)
 			if(GetValue==0 || GetUARTValue==0)
 			{
 			SET_BIT(ADCSRA,7);
-
+			if (System==2)
+			{
+			Flag_UART=1;
+			}
 		LCD_Write4String("1-Temp",0,1);
 		LCD_Write4String("2-Light",1,1);
 		LCD_Write4String("3-Door",0,9);
@@ -38,6 +42,11 @@ void Display(void)
 		if (GetValue==1 || GetUARTValue==1)
 		{
 			flag_ADC_CHANNEL=1;
+			if (System==2)
+			{
+				Flag_UART=1;
+			}
+
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
 			LCD_VidWrite4Cmd(Clear_Display);
 
@@ -54,12 +63,12 @@ void Display(void)
 				LCD_VidDisp4Number(GetADC_Value);
 				LCD_Write4String("C",0,10);
 				//_delay_ms(100);
-			if (GetADC_Value>40)
+			if (GetADC_Value>350)
 			{
 				LCD_Write4String("Fan ON",1,4);
 			}
 
-			else if (GetADC_Value<=35)
+			else if (GetADC_Value<=250)
 			{
 				LCD_Write4String("Fan OFF",1,4);
 			}
@@ -79,6 +88,11 @@ void Display(void)
 		if (GetValue==7 || GetUARTValue==7)
 		{
 			flag_ADC_CHANNEL=0;
+			if (System==2)
+			{
+				Flag_UART=1;
+			}
+
 			ADC_VidSingleEnded(flag_ADC_CHANNEL);
 			LCD_VidWrite4Cmd(Clear_Display);
 
@@ -128,7 +142,7 @@ void Display(void)
 		{
 			while (1)
 			{
-				Flag_UART=1;
+
 				LCD_Write4String("Door Lock:",0,0);
 				_delay_ms(250);
 				GetValue=GetPressedKey(PRTC);
@@ -156,7 +170,7 @@ void Display(void)
 					GetValue=0;
 					GetUARTValue=0;
 					LCD_VidWrite4Cmd(Clear_Display);
-					Flag_UART=0;
+
 					break;
 				}
 			}
