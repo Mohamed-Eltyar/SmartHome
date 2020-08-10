@@ -3,7 +3,7 @@
 #include "../DIO/DIO_Interface.h"
 #include "UART_Interface.h"
 #include "UART_Register.h"
-
+extern u8 Flag_UART;
 
 void UART_VidInit(u16 LOC_u16BaudRate)
 {
@@ -115,6 +115,11 @@ u8 UART_u8ReadData(void)
 	u8 retData=0;
 	while(!GET_BIT(UCSRA,RXC))
 	{
+		if(1==Flag_UART)
+		{
+			_delay_ms(300);
+			break;
+		}
 		/* wait for data to be received */
 
 
@@ -132,7 +137,6 @@ u8 UART_u8ReadDataNoWait(void)
 			/* wait for data to be received */
 			_delay_ms(300);
 			break;
-
 	 }
 		retData=UDR-48;
 		return retData;

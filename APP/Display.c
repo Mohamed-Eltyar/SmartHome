@@ -10,6 +10,7 @@
 extern volatile u8 flag_ADC_CHANNEL;	   // channel adc
 u8 Display_Cursor[8]={0x10,0x18,0x1E,0x1F,0x1F,0x1E,0x18,0x10};
 extern u8 Flag_ReturnHome;
+u8 Flag_UART =0;
 void Display(void)
 {
 	u8 GetValue=0;				//return keypad
@@ -42,6 +43,7 @@ void Display(void)
 
 			while (1)
 			{
+				Flag_UART=1;
 				GetValue=GetPressedKey(PRTC);
 				GetUARTValue=UART_u8ReadData();
 				GetADC_Value=ADC_u16GetCrruntValu();
@@ -67,7 +69,7 @@ void Display(void)
 				Tim_Count2_VidCompareReg(0);
 				CLR_BIT(ADCSRA,7);
 				LCD_VidWrite4Cmd(Clear_Display);
-
+				Flag_UART=0;
 				break;
 			}
 			}
@@ -81,6 +83,7 @@ void Display(void)
 
 			while(1)
 			{
+				Flag_UART=1;
 				GetValue=GetPressedKey(PRTC);
 				GetUARTValue=UART_u8ReadData();
 				GetADC_Value=ADC_u16GetCrruntValu();
@@ -114,7 +117,7 @@ void Display(void)
 					CLR_BIT(ADCSRA,7);
 					DIO_VidSetPortValue(PRTA,0x00);
 					LCD_VidWrite4Cmd(Clear_Display);
-
+					Flag_UART=0;
 					break;
 				}
 			}
@@ -124,7 +127,7 @@ void Display(void)
 		{
 			while (1)
 			{
-
+				Flag_UART=1;
 				LCD_Write4String("Door Lock:",0,0);
 				_delay_ms(250);
 				GetValue=GetPressedKey(PRTC);
@@ -152,7 +155,7 @@ void Display(void)
 					GetValue=0;
 					GetUARTValue=0;
 					LCD_VidWrite4Cmd(Clear_Display);
-
+					Flag_UART=0;
 					break;
 				}
 			}
