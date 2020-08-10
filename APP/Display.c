@@ -47,7 +47,8 @@ void Display(void)
 				GetValue=GetPressedKey(PRTC);
 				GetUARTValue=UART_u8ReadData();
 				GetADC_Value=ADC_u16GetCrruntValu();
-				//GetADC_Value=(GetADC_Value*5000UL)/1024;
+				GetADC_Value=(GetADC_Value*5000UL)/102400;	//percentage
+
 				LCD_Write4String("Temp=",0,0);
 				LCD_GoToPosition(0,7);
 				LCD_VidDisp4Number(GetADC_Value);
