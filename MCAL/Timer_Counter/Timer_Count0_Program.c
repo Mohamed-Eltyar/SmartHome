@@ -72,3 +72,30 @@ ISR(TIMER0_CTC_VECT) //Compare match Interrupt
 		Tim0CallBackPtrCOMA();
 		}
 }
+
+
+void _delayT_ms(u16 copy_u16timevalue)
+{
+	copy_u16timevalue *=4;
+	//Normal mode
+	CLR_BIT(TCCR0,6);
+	CLR_BIT(TCCR0,3);
+
+	//Prescaler equal 1024
+	CLR_BIT(TCCR0,2);
+	SET_BIT(TCCR0,1);
+	CLR_BIT(TCCR0,0);
+	u16 couner=0;
+	while(1)
+	{
+		TCNT0=24;
+		while(!GET_BIT(TIFR,0));
+		SET_BIT(TIFR,0);
+		couner++;
+		if(copy_u16timevalue==couner)
+		{
+			break;
+		}
+	}
+}
+

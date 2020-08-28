@@ -7,6 +7,8 @@ void Tim_Count0_VidInit(void);
 void Tim_Count0_VidCompOutMode(void);
 void Tim_Count0_VidInterruptEn(void);
 
+void _delayT_ms(u16 copy_u16timevalue);
+
 void Timer0_VidSetCallBack(void (*Fptr)(void));
 
 
